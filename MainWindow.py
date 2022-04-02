@@ -2,13 +2,12 @@ from tkinter import *
 import string
 
 global allAssignments
-
 allAssignments  = []
 
 window=Tk()
 
 #set geometry and title of main window
-window.title('Course Scheduler')
+window.title('Assignment Scheduler')
 window.geometry("500x400")
 
 
@@ -39,7 +38,6 @@ def openManualWindow():
         global allAssignments
         name=AName.get()
         dueDate=ADueDate.get()
-        #dueDate.translate(None, string.letters)
         dueDate = dueDate.translate(dueDate.maketrans("", "", string.ascii_letters))
         manualWindow.destroy()
         assignmentInfo = [name, dueDate]

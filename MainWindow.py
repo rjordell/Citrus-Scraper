@@ -38,7 +38,6 @@ def openManualWindow():
         global allAssignments
         name=AName.get()
         dueDate=ADueDate.get()
-        #dueDate.translate(None, string.letters)
         dueDate = dueDate.translate(dueDate.maketrans("", "", string.ascii_letters))
         manualWindow.destroy()
         assignmentInfo = [name, dueDate]

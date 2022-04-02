@@ -1,5 +1,16 @@
 from tkinter import *
 import string
+from icalendar import Calendar
+
+
+file = open('test.ics', 'rb')
+cal = Calendar.from_ical(file.read())
+for component in cal.walk():
+    print(component.get('SUMMARY'))
+    dDate = component.get('DTEND')
+    Calendar(dDate).to_ical()
+file.close()
+
 
 global allAssignments
 allAssignments  = []
@@ -39,25 +50,28 @@ def openManualWindow():
         name=AName.get()
         dueDate=ADueDate.get()
         dueDate = dueDate.translate(dueDate.maketrans("", "", string.ascii_letters))
-        manualWindow.destroy()
+        #manualWindow.destroy()
+        AName.delete(0, END)
+        ADueDate.delete(0, END)
         assignmentInfo = [name, dueDate]
         print("added ", assignmentInfo)
         allAssignments.append(assignmentInfo)
+    def backButton():
+        manualWindow.destroy()
 
-
-    btn = Button(manualWindow, text="Add Assignment", command = getInput).grid(row = 5, sticky = W)
-
+    btn = Button(manualWindow, text="Add Assignment", command = getInput).grid(row = 5, column = 0, sticky = W)
+    btn = Button(manualWindow, text ="Go Back", command = backButton).grid(row = 5, column = 1, sticky = W)
 
 
 
 # add widgets here
-btn = Button(window, text="Manually Add Assignment", fg="black", command=openManualWindow)
-btn.place(x=50, y=100)
+btn = Button(window, text="Add Assignments", fg="black", command=openManualWindow)
+btn.place(x=50, y = 50)
 
 btn = Button(window, text="Sign in with Canvas", fg="black")
-btn.place(x=300, y=100)
+btn.place(x=50, y= 80)
 
 btn = Button(window, text="Generate Calendar", fg='black', command = generateCalendar)
-btn.place(x=200, y=250)
+btn.place(x=50, y=350)
 
 window.mainloop()

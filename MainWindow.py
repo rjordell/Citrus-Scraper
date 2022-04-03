@@ -72,6 +72,26 @@ def textMessageAlerts():
     def addPhone():
         number = phoneNumber.get()
         phoneNumber.delete(0, END)
+        file = open('/Users/victorsandoval/canvas calender assignment/CitrusScraper/test.ics')
+        cal = Calendar.from_ical(file.read())
+        for component in cal.walk():
+            if component.name == "VEVENT":
+                print(component.get('SUMMARY'))
+                dDate = component.decoded('DTEND')
+                sep = ' '
+                str1 = str(dDate)
+                ddDate = str1.split(sep, 1)[0]
+                print(ddDate)
+                #if ddDate < today:
+                sum = component.get('SUMMARY')
+                summ = str(sum)
+                text = ddDate + summ
+                #text = component.get('SUMMARY') + dDate
+                send_text(acc_sid, token, text, number)
+                print(dDate)
+        file.close()
+
+
     def closeSMS():
         smsWindow.destroy()
 

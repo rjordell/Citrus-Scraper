@@ -1,16 +1,19 @@
 from tkinter import *
 import string
 from icalendar import Calendar
-
+from datetime import date
 
 file = open('test.ics', 'rb')
 cal = Calendar.from_ical(file.read())
 for component in cal.walk():
-    print(component.get('SUMMARY'))
-    dDate = component.get('DTEND')
-    Calendar(dDate).to_ical()
-file.close()
+    if component.name == "VEVENT":
+        print(component.get('SUMMARY'))
+        dDate = component.decoded('DTEND')
+        print(dDate)
 
+
+
+file.close()
 
 global allAssignments
 allAssignments  = []

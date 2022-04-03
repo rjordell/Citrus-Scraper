@@ -1,6 +1,25 @@
+
 from tkinter import *
 import string
 from icalendar import Calendar
+from datetime import date, timedelta
+from  send_sm import *
+#-----------------------
+acc_sid = 'AC4f786eff34248408e94260ba0cbbf97d'
+token = 'e9b981f2ac30c03817e1318623143331'
+#------------------------
+#text = "Due date: April 7, 2022 Assignment: Hw1"
+
+#send_text(acc_sid, token, text)
+#-------------------------
+
+today = date.today() + timedelta(days = 5)
+
+print(today)
+
+# file = open('test.ics', 'rb')
+file = open('/Users/victorsandoval/canvas calender assignment/CitrusScraper/test.ics')
+
 from datetime import date
 
 file = open('test.ics', 'rb')
@@ -9,9 +28,17 @@ for component in cal.walk():
     if component.name == "VEVENT":
         print(component.get('SUMMARY'))
         dDate = component.decoded('DTEND')
+        sep = ' '
+        str1 = str(dDate)
+        ddDate = str1.split(sep, 1)[0]
+        print(ddDate)
+        #if ddDate < today:
+        sum = component.get('SUMMARY')
+        summ = str(sum)
+        text = ddDate + summ
+        #text = component.get('SUMMARY') + dDate
+        send_text(acc_sid, token, text)
         print(dDate)
-
-
 
 file.close()
 
@@ -34,7 +61,6 @@ def generateCalendar():
 
     allAssignments.sort(key = lambda x: int(x[1]))
     print(allAssignments)
-
 
 def textMessageAlerts():
     smsWindow = Toplevel(window)
@@ -80,6 +106,7 @@ def openManualWindow():
         assignmentInfo = [name, dueDate]
         print("added ", assignmentInfo)
         allAssignments.append(assignmentInfo)
+        
     def backButton():
         manualWindow.destroy()
 

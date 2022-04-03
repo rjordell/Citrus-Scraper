@@ -25,11 +25,15 @@ for component in cal.walk():
         print(component.get('SUMMARY'))
         dDate = component.decoded('DTEND')
         sep = ' '
-        #ddDate = dDate.split(sep, 1)[0]
-        print(dDate)
-        #if dDate < today:
-          #  text = component.get('SUMMARY') + dDate
-           # send_text(acc_sid, token, text)
+        str1 = str(dDate)
+        ddDate = str1.split(sep, 1)[0]
+        print(ddDate)
+        #if ddDate < today:
+        sum = component.get('SUMMARY')
+        summ = str(sum)
+        text = ddDate + summ
+        #text = component.get('SUMMARY') + dDate
+        send_text(acc_sid, token, text)
 
 
 

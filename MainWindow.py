@@ -84,28 +84,35 @@ def openManualWindow():
     Label(manualWindow, text="Assignment Name").grid(row = 1, sticky = W)
     AName=Entry(manualWindow)
 
-    Label(manualWindow, text="Assignment Due Date (mm/dd/year)").grid(row = 3, sticky = W)
+    Label(manualWindow, text="Date Due (mm/dd/year)").grid(row = 3, sticky = W)
     ADueDate=Entry(manualWindow)
+
+    Label(manualWindow, text="Time Due (hh:mm)").grid(row = 5, sticky = W)
+    ADueTime=Entry(manualWindow)
 
     AName.grid(row = 1, column = 1)
     ADueDate.grid(row = 3, column = 1)
+    ADueTime.grid(row = 5, column = 1)
 
     def getInput():
         global allAssignments
         name=AName.get()
         dueDate=ADueDate.get()
-        dueDate = dueDate.translate(dueDate.maketrans("", "", string.ascii_letters))
+        dueDate = dueDate.translate(dueDate.maketrans("", "", string.ascii_letters)) # Remove invalid letters from dueDate and dueTime
+        dueTime = ADueTime.get()
+        dueDate = dueTime.translate(dueDate.maketrans("", "", string.ascii_letters))
         AName.delete(0, END)
         ADueDate.delete(0, END)
-        assignmentInfo = [name, dueDate]
+        ADueTime.delete(0, END)
+        assignmentInfo = [name, dueDate, dueTime]
         print("added ", assignmentInfo)
         allAssignments.append(assignmentInfo)
 
     def closeManual():
         manualWindow.destroy()
 
-    Button(manualWindow, text="Add Assignment", command = getInput).grid(row = 5, column = 0, sticky = W)
-    Button(manualWindow, text ="Go Back", command = closeManual).grid(row = 5, column = 1, sticky = W)
+    Button(manualWindow, text="Add Assignment", command = getInput).grid(row = 7, column = 0, sticky = W)
+    Button(manualWindow, text ="Go Back", command = closeManual).grid(row = 7, column = 1, sticky = W)
 
 
 

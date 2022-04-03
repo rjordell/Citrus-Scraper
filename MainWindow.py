@@ -20,9 +20,6 @@ print(today)
 # file = open('test.ics', 'rb')
 file = open('/Users/victorsandoval/canvas calender assignment/CitrusScraper/test.ics')
 
-from datetime import date
-
-file = open('test.ics', 'rb')
 cal = Calendar.from_ical(file.read())
 for component in cal.walk():
     if component.name == "VEVENT":

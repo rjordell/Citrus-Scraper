@@ -1,7 +1,7 @@
 # CitrusScraper
 A program that signs a user up for text alerts based on events from their calendar.
 
-Made by Bilal Nasir, Jordell Rodriguez, Braxton Mott, and Victor Sandoval Vargas. 
+Made by Bilal Nasir, Jordell Rodrigues, Braxton Mott, and Victor Sandoval Vargas. 
 
 
 # Overview
